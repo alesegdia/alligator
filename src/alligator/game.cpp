@@ -1,22 +1,22 @@
-#include "allegroapp.h"
+#include "game.h"
 #include <stdio.h>
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_primitives.h>
+#include <allegro5/allegro_font.h>
+#include <allegro5/allegro_ttf.h>
 
-AllegroApp::AllegroApp( int screen_width, int screen_height )
+Game::Game( int screen_width, int screen_height )
 	: m_screenWidth(screen_width), m_screenHeight(screen_height)
 {
 
 }
 
-AllegroApp::~AllegroApp() {
-
-	al_shutdown_primitives_addon();
-	al_shutdown_image_addon();
+Game::~Game()
+{
 
 }
 
-int AllegroApp::Init() {
+int Game::init() {
 	if(!al_init()) {
 		fprintf(stderr, "failed to initialize allegro!\n");
 		return -1;
@@ -34,6 +34,16 @@ int AllegroApp::Init() {
 
 	if(!al_init_primitives_addon()) {
 		fprintf(stderr, "failed to initialize primitives addon!\n");
+		return -1;
+	}
+
+	if(!al_init_font_addon()) {
+		fprintf(stderr, "failed to initialize font addon!\n");
+		return -1;
+	}
+
+	if(!al_init_ttf_addon()) {
+		fprintf(stderr, "failed to initialize ttf addon!\n");
 		return -1;
 	}
 
@@ -70,14 +80,14 @@ int AllegroApp::Init() {
 
 	al_set_target_bitmap(al_get_backbuffer(m_display));
 
-	Input::instance->Initialize();
+	Input::Initialize();
 
-	ready();
+	create();
 
 	return 0;
 }
 
-void AllegroApp::handleEvent(ALLEGRO_EVENT& ev)
+void Game::handleEvent(ALLEGRO_EVENT& ev)
 {
 	if(ev.type == ALLEGRO_EVENT_TIMER) {
 		m_redraw = true;
@@ -86,20 +96,48 @@ void AllegroApp::handleEvent(ALLEGRO_EVENT& ev)
 		m_doexit = true;
 	}
 	else if(ev.type == ALLEGRO_EVENT_KEY_DOWN) {
-		Input::instance->notifyKeyDown(ev.keyboard.keycode);
+		Input::NotifyKeyDown(ev.keyboard.keycode);
+		this->notifyKeyDown(ev.keyboard.keycode);
 	}
 	else if(ev.type == ALLEGRO_EVENT_KEY_UP) {
-		Input::instance->notifyKeyUp(ev.keyboard.keycode);
+		Input::NotifyKeyUp(ev.keyboard.keycode);
+		this->notifyKeyUp(ev.keyboard.keycode);
 	}
 }
 
-ALLEGRO_DISPLAY *AllegroApp::display()
+void Game::render()
+{
+	m_currentScreen->render();
+}
+
+void Game::update(double delta)
+{
+	m_currentScreen->update(delta);
+}
+
+void Game::setScreen(IScreen::Ptr screen)
+{
+	if( m_currentScreen != nullptr )
+	{
+		m_currentScreen->hide();
+	}
+
+	m_currentScreen = screen;
+	m_currentScreen->show();
+}
+
+void Game::close()
+{
+	m_doexit = true;
+}
+
+ALLEGRO_DISPLAY *Game::display()
 {
 	return m_display;
 }
 
-int AllegroApp::Exec() {
-	int retcode = Init();
+int Game::exec() {
+	int retcode = init();
 	if( retcode != 0 ) return retcode;
 
 	double now, then;
@@ -116,16 +154,22 @@ int AllegroApp::Exec() {
 
 		update(delta);
 
-		if( m_redraw && al_is_event_queue_empty(m_eventQueue) ) {
+		if( m_redraw && al_is_event_queue_empty(m_eventQueue) )
+		{
 			al_set_target_bitmap(al_get_backbuffer(m_display));
 			m_redraw = false;
-			draw();
+			render();
 			al_flip_display();
 		}
 	}
 
 	dispose();
 	Input::Dispose();
+
+	al_shutdown_image_addon();
+	al_shutdown_primitives_addon();
+	al_shutdown_ttf_addon();
+	al_shutdown_font_addon();
 
 }
 
