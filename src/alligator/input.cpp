@@ -23,12 +23,22 @@ Input::Input()
 	std::fill(std::begin(m_keyStates), std::begin(m_keyStates) + ALLEGRO_KEY_MAX, false);
 }
 
-void Input::notifyKeyDown(int key)
+void Input::NotifyKeyDown(int key)
 {
-	m_keyStates[key] = true;
+	instance->m_keyStates[key] = true;
+
+	if( instance->m_inputProcessor != nullptr )
+	{
+		instance->m_inputProcessor->keyDown(key);
+	}
 }
 
-void Input::notifyKeyUp(int key)
+void Input::NotifyKeyUp(int key)
 {
-	m_keyStates[key] = false;
+	instance->m_keyStates[key] = false;
+
+	if( instance->m_inputProcessor != nullptr )
+	{
+		instance->m_inputProcessor->keyUp(key);
+	}
 }

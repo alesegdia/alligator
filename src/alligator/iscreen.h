@@ -1,14 +1,22 @@
 #pragma once
 
+#include <memory>
+
 class IScreen
 {
 public:
+	typedef std::shared_ptr<IScreen> Ptr;
 	virtual ~IScreen() = 0 ;
 
 	/**
 	 * @brief called every time the screen is put to active
 	 */
-	virtual void wake() = 0 ;
+	virtual void show() = 0 ;
+
+	/**
+	 * @brief called every time the screen is removed from current active
+	 */
+	virtual void hide() = 0 ;
 
 	/**
 	 * @brief for game logic
