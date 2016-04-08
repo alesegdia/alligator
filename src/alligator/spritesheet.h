@@ -10,7 +10,7 @@ public:
 	explicit Spritesheet( size_t width, size_t height, ALLEGRO_BITMAP* bitmap );
 
 	/**
-	 * @brief retrieve a frame by its index
+	 * @brief retrieves a frame by its index
 	 * @param num_frame frame index
 	 * @return the sub bitmap associated to the index
 	 */
