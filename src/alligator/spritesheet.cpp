@@ -14,6 +14,13 @@ ALLEGRO_BITMAP *Spritesheet::getFrame(int num_frame)
 	return m_frames[num_frame];
 }
 
+ALLEGRO_BITMAP *Spritesheet::getFrame(int x_frame, int y_frame)
+{
+	int index = coordToIndex(x_frame, y_frame);
+	assert( index < m_frames.size() );
+	return getFrame(coordToIndex(x_frame, y_frame));
+}
+
 void Spritesheet::reset(size_t width, size_t height, ALLEGRO_BITMAP *bitmap)
 {
 	m_width = width;

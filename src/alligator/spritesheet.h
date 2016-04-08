@@ -16,6 +16,14 @@ public:
 	 */
 	ALLEGRO_BITMAP* getFrame( int num_frame );
 
+	/**
+	 * @brief retrieves a frame by its coordinate
+	 * @param x_frame the x coordinate
+	 * @param y_frame the y coordinate
+	 * @return the sub bitmap in specified coordinate
+	 */
+	ALLEGRO_BITMAP* getFrame( int x_frame, int y_frame );
+
 private:
 
 	/**
