@@ -13,6 +13,8 @@ public:
 	static void Dispose();
 
 	static bool IsKeyDown( int key );
+	static bool IsKeyJustPressed( int key );
+	static bool Update();
 
 	static void NotifyKeyDown( int key );
 	static void NotifyKeyUp( int key );
@@ -25,6 +27,7 @@ private:
 	static Input* instance;
 
 	IInputProcessor::Ptr m_inputProcessor;
+	int m_lastPressed;
 
 	bool m_keyStates[ALLEGRO_KEY_MAX];
 };

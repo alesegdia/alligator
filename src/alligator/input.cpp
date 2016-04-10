@@ -1,5 +1,6 @@
 #include "input.h"
 #include <algorithm>
+#include <iostream>
 
 Input* Input::instance = nullptr;
 
@@ -18,6 +19,16 @@ bool Input::IsKeyDown(int key)
 	return instance->m_keyStates[key];
 }
 
+bool Input::IsKeyJustPressed(int key)
+{
+	return key == instance->m_lastPressed;
+}
+
+bool Input::Update()
+{
+	instance->m_lastPressed = ALLEGRO_KEY_MAX;
+}
+
 Input::Input()
 {
 	std::fill(std::begin(m_keyStates), std::begin(m_keyStates) + ALLEGRO_KEY_MAX, false);
@@ -25,7 +36,9 @@ Input::Input()
 
 void Input::NotifyKeyDown(int key)
 {
+	std::cout << "recv keydown: " << key << std::endl;
 	instance->m_keyStates[key] = true;
+	instance->m_lastPressed = key;
 
 	if( instance->m_inputProcessor != nullptr )
 	{
