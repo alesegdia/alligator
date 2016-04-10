@@ -19,6 +19,11 @@ public:
 		m_position.set(x, y);
 	}
 
+	void move( float x, float y )
+	{
+		m_position.set(m_position.x() + x, m_position.y() + y);
+	}
+
 	void scale( float x, float y )
 	{
 		m_scale.set(x, y);
