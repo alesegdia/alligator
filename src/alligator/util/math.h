@@ -95,6 +95,11 @@ public:
 		m_position = new_pos;
 	}
 
+	void position( float x, float y )
+	{
+		m_position.set(x, y);
+	}
+
 	void x( T new_x )
 	{
 		m_position.x(new_x);
