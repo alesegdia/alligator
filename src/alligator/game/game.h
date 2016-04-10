@@ -1,7 +1,7 @@
 #include <allegro5/allegro.h>
 #include <memory>
 
-#include "input.h"
+#include <alligator/input/input.h>
 #include "iscreen.h"
 
 class Game {

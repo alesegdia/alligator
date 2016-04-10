@@ -8,7 +8,7 @@
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
 
-#include "rng.h"
+#include <alligator/util/rng.h>
 
 Game::Game( int screen_width, int screen_height )
 	: m_screenWidth(screen_width), m_screenHeight(screen_height)
