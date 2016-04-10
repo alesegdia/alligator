@@ -63,6 +63,12 @@ public:
 
 	}
 
+	Rect( const Vec2<T> pos, const Vec2<T> size )
+		: m_position(pos), m_size(size)
+	{
+
+	}
+
 	Rect( const Rect<T>& other )
 		: m_position(other.x(), other.y()), m_size(other.w(), other.h())
 	{
@@ -82,6 +88,11 @@ public:
 	Vec2<T> max() const
 	{
 		return m_position + m_size;
+	}
+
+	void position( Vec2f new_pos )
+	{
+		m_position = new_pos;
 	}
 
 	void x( T new_x )

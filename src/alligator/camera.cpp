@@ -1,6 +1,12 @@
 
 #include "camera.h"
 
+Camera::Camera(Vec2f viewport)
+	: m_viewport(viewport)
+{
+
+}
+
 void Camera::bind()
 {
 	al_identity_transform(&m_transform);
@@ -23,6 +29,11 @@ float Camera::y()
 	return m_position.y();
 }
 
+Rectf Camera::boundary() const
+{
+	return Rectf(m_position, m_viewport);
+}
+
 void Camera::position(float x, float y)
 {
 	m_position.set(x, y);
@@ -39,13 +50,25 @@ void Camera::scale(float x, float y)
 }
 
 
-void Scroller::operator()(Camera &cam)
+void Scroller::operator()(Camera &cam, float x, float y)
 {
-	Vec2f new_cam_position = scroll(cam.x(), cam.y());
+	cam.position(scroll(cam, Vec2f(x, y)));
 }
 
 
 Scroller::~Scroller()
 {
 
+}
+
+
+FixedScroller::FixedScroller(Rectf global)
+	: m_globalBounds(global) {}
+
+
+Vec2f FixedScroller::scroll(const Camera &cam, Vec2f focus)
+{
+	Rectf cam_boundary = cam.boundary();
+	cam_boundary.position( focus );
+	return clamp(cam_boundary, m_globalBounds).min();
 }

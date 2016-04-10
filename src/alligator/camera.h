@@ -7,11 +7,7 @@ class Camera
 {
 public:
 
-	Camera( Vec2f viewport )
-		: m_viewport(viewport)
-	{
-
-	}
+	Camera( Vec2f viewport );
 
 	void bind();
 
@@ -20,6 +16,8 @@ public:
 	float x();
 
 	float y();
+
+	Rectf boundary() const;
 
 	void position( float x, float y );
 
@@ -45,9 +43,9 @@ class Scroller
 public:
 	virtual ~Scroller() = 0 ;
 
-	void operator()(Camera& cam);
+	void operator()(Camera& cam, float x, float y);
 
-	virtual Vec2f scroll( float current_x, float current_y ) = 0 ;
+	virtual Vec2f scroll( const Camera& cam, Vec2f focus ) = 0 ;
 
 };
 
@@ -56,19 +54,13 @@ class FixedScroller : public Scroller
 {
 public:
 
-	FixedScroller( Rectf outer, Rectf inner, Rectf character, Vec2f viewport )
-		: m_outer(outer), m_inner(inner), m_character(character) {}
+	FixedScroller( Rectf global );
 
-	Vec2f scroll(float current_x, float current_y) override
-	{
-		Rectf campos(clamp(m_inner, m_outer));
-		return campos.min();
-	}
+	Vec2f scroll( const Camera& cam, Vec2f focus ) override;
 
 private:
-	Rectf m_outer;
-	Rectf m_inner;
-	Rectf m_character;
+	Rectf m_globalBounds;
+
 };
 
 
