@@ -31,6 +31,8 @@ public:
 	 */
 	void addFrame( ALLEGRO_BITMAP* frame );
 
+	void addFrames( std::vector<ALLEGRO_BITMAP*> frames );
+
 	/**
 	 * @brief updates frame and fix timer to data
 	 * @param data the animation data to be updated

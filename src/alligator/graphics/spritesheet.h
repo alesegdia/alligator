@@ -2,10 +2,13 @@
 
 #include <allegro5/allegro.h>
 #include <vector>
+#include <memory>
 
 class Spritesheet
 {
 public:
+
+	typedef std::shared_ptr<Spritesheet> SharedPtr;
 
 	explicit Spritesheet( size_t width, size_t height, ALLEGRO_BITMAP* bitmap );
 
@@ -23,6 +26,8 @@ public:
 	 * @return the sub bitmap in specified coordinate
 	 */
 	ALLEGRO_BITMAP* getFrame( int x_frame, int y_frame );
+
+	std::vector<ALLEGRO_BITMAP*> getFrames( int start, int end );
 
 private:
 

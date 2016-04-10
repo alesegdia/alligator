@@ -21,6 +21,20 @@ ALLEGRO_BITMAP *Spritesheet::getFrame(int x_frame, int y_frame)
 	return getFrame(coordToIndex(x_frame, y_frame));
 }
 
+std::vector<ALLEGRO_BITMAP *> Spritesheet::getFrames(int start, int end)
+{
+	assert( start >= 0 && start <= m_frames.size() );
+	assert( end >= 0 && end <= m_frames.size() );
+
+	std::vector<ALLEGRO_BITMAP*> frames;
+	for( int i = start; i <= end; i++ )
+	{
+		frames.push_back(m_frames[i]);
+	}
+
+	return frames;
+}
+
 void Spritesheet::reset(size_t width, size_t height, ALLEGRO_BITMAP *bitmap)
 {
 	m_width = width;

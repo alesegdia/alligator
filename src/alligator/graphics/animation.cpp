@@ -14,6 +14,11 @@ void Animation::addFrame(ALLEGRO_BITMAP *frame)
 	assert(m_frames.size() <= m_numFrames);
 }
 
+void Animation::addFrames(std::vector<ALLEGRO_BITMAP *> frames)
+{
+	m_frames.insert(m_frames.begin(), frames.begin(), frames.end());
+}
+
 void Animation::updateData(AnimationData &data)
 {
 	while( data.timer > m_animDuration )
