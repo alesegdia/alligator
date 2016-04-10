@@ -24,3 +24,21 @@ void Animation::updateData(AnimationData &data)
 	int frame_index = floor(data.timer / m_frameDuration);
 	data.currentFrame = m_frames[frame_index];
 }
+
+
+void AnimationData::reset()
+{
+	timer = 0;
+}
+
+
+void AnimationData::update(double t)
+{
+	timer -= t;
+}
+
+
+void AnimationData::render(float x, float y)
+{
+	al_draw_bitmap(currentFrame, x, y, 0);
+}
