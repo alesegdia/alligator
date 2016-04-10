@@ -1,6 +1,8 @@
 
 #pragma once
 
+#include <algorithm>
+
 template <typename T>
 class Vec2 {
 public:
@@ -56,24 +58,61 @@ class Rect
 public:
 	Vec2<T> min()
 	{
-		return m_min;
+		return m_position;
 	}
 
 	Vec2<T> max()
 	{
-		return m_max;
+		return m_position + m_size;
 	}
 
-	void min(Vec2<T> min )
+	void x( T new_x )
 	{
-		m_min = min;
+		m_position.x(new_x);
 	}
 
-	void max( Vec2<T> max )
+	void y( T new_y )
 	{
-		m_max = max;
+		m_position.y(new_y);
+	}
+
+	T x()
+	{
+		return m_position.x();
+	}
+
+	T y()
+	{
+		return m_position.y();
+	}
+
+	T w()
+	{
+		return m_size.x();
+	}
+
+	T h()
+	{
+		return m_size.y();
 	}
 
 private:
-	Vec2<T> m_min, m_max;
+	Vec2<T> m_position, m_size;
 };
+
+typedef Rect<float> Rectf;
+
+template <typename T>
+float clamp(T v, T min, T max )
+{
+	return std::max(std::min(v, max), min);
+}
+
+template <typename T>
+Rect<T> clamp( Rect<T> container, Rect<T> contained )
+{
+	Rect<T> rect;
+	rect.x( clamp<T>(contained.x(), container.x(), container.x() + container.w() - contained.w()) );
+	rect.y( clamp<T>(contained.y(), container.y(), container.y() + container.w() - contained.w()) );
+	return rect;
+}
