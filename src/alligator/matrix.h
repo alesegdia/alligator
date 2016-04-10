@@ -5,6 +5,7 @@
 #include <iostream>
 #include <memory>
 #include <iomanip>
+#include <cassert>
 
 template <typename T>
 class Matrix2D
