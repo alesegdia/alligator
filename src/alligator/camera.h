@@ -1,7 +1,7 @@
 #pragma once
 
 #include <allegro5/allegro5.h>
-#include "geometry.h"
+#include "math.h"
 
 class Camera
 {
@@ -61,7 +61,7 @@ public:
 
 	Vec2f scroll(float current_x, float current_y) override
 	{
-		Rectf campos = clamp(m_inner, m_outer);
+		Rectf campos(clamp(m_inner, m_outer));
 		return campos.min();
 	}
 

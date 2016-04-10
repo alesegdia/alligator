@@ -7,7 +7,7 @@ template <typename T>
 class Vec2 {
 public:
 	Vec2() : m_x(0), m_y(0) {}
-	Vec2(float x, float y) : m_x(x), m_y(y) {}
+	Vec2(T x, T y) : m_x(x), m_y(y) {}
 	Vec2(const Vec2<T>& other) : Vec2(other.m_x, other.m_y) {}
 
 	void x( T newx )
@@ -20,17 +20,17 @@ public:
 		m_y = newy;
 	}
 
-	T x()
+	T x() const
 	{
 		return m_x;
 	}
 
-	T y()
+	T y() const
 	{
 		return m_y;
 	}
 
-	void set( float x, float y )
+	void set( T x, T y )
 	{
 		m_x = x; m_y = y;
 	}
@@ -63,12 +63,23 @@ public:
 
 	}
 
-	Vec2<T> min()
+	Rect( const Rect<T>& other )
+		: m_position(other.x(), other.y()), m_size(other.w(), other.h())
+	{
+
+	}
+
+	Rect()
+	{
+
+	}
+
+	Vec2<T> min() const
 	{
 		return m_position;
 	}
 
-	Vec2<T> max()
+	Vec2<T> max() const
 	{
 		return m_position + m_size;
 	}
@@ -83,22 +94,22 @@ public:
 		m_position.y(new_y);
 	}
 
-	T x()
+	T x() const
 	{
 		return m_position.x();
 	}
 
-	T y()
+	T y() const
 	{
 		return m_position.y();
 	}
 
-	T w()
+	T w() const
 	{
 		return m_size.x();
 	}
 
-	T h()
+	T h() const
 	{
 		return m_size.y();
 	}
