@@ -27,15 +27,8 @@ protected:
 	virtual void create() = 0 ;
 	virtual void dispose() = 0 ;
 
-	virtual void notifyKeyUp( int key )
-	{
-		Input::NotifyKeyUp(key);
-	}
-
-	virtual void notifyKeyDown( int key )
-	{
-		Input::NotifyKeyDown(key);
-	}
+	virtual void notifyKeyUp( int key );
+	virtual void notifyKeyDown( int key );
 
 	void setScreen(IScreen::Ptr screen);
 

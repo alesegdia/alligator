@@ -1,9 +1,14 @@
-#include "game.h"
 #include <stdio.h>
+
+#include "game.h"
+
+
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
+
+#include "rng.h"
 
 Game::Game( int screen_width, int screen_height )
 	: m_screenWidth(screen_width), m_screenHeight(screen_height)
@@ -80,6 +85,7 @@ int Game::init() {
 
 	al_set_target_bitmap(al_get_backbuffer(m_display));
 
+	RNG::Initialize(time(NULL));
 	Input::Initialize();
 
 	create();
@@ -89,18 +95,20 @@ int Game::init() {
 
 void Game::handleEvent(ALLEGRO_EVENT& ev)
 {
-	if(ev.type == ALLEGRO_EVENT_TIMER) {
+	if(ev.type == ALLEGRO_EVENT_TIMER)
+	{
 		m_redraw = true;
 	}
-	else if(ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
+	else if(ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+	{
 		m_doexit = true;
 	}
-	else if(ev.type == ALLEGRO_EVENT_KEY_DOWN) {
-		Input::NotifyKeyDown(ev.keyboard.keycode);
+	else if(ev.type == ALLEGRO_EVENT_KEY_DOWN)
+	{
 		this->notifyKeyDown(ev.keyboard.keycode);
 	}
-	else if(ev.type == ALLEGRO_EVENT_KEY_UP) {
-		Input::NotifyKeyUp(ev.keyboard.keycode);
+	else if(ev.type == ALLEGRO_EVENT_KEY_UP)
+	{
 		this->notifyKeyUp(ev.keyboard.keycode);
 	}
 }
@@ -113,6 +121,16 @@ void Game::render()
 void Game::update(double delta)
 {
 	m_currentScreen->update(delta);
+}
+
+void Game::notifyKeyUp(int key)
+{
+	Input::NotifyKeyUp(key);
+}
+
+void Game::notifyKeyDown(int key)
+{
+	Input::NotifyKeyDown(key);
 }
 
 void Game::setScreen(IScreen::Ptr screen)
@@ -153,6 +171,7 @@ int Game::exec() {
 		then = now;
 
 		update(delta);
+		Input::Update();
 
 		if( m_redraw && al_is_event_queue_empty(m_eventQueue) )
 		{
