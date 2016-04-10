@@ -39,7 +39,7 @@ void AnimationData::reset()
 
 void AnimationData::update(double t)
 {
-	timer -= t;
+	timer += t;
 }
 
 
