@@ -64,8 +64,6 @@ public:
 		std::fill(m_data.begin(), m_data.end(), fill_value);
 	}
 
-private:
-
 	void resize( int cols, int rows )
 	{
 		m_cols = cols;
@@ -76,6 +74,14 @@ private:
 		m_data.reserve(cols * rows);
 		m_data.resize(cols * rows);
 	}
+
+	void resize( int cols, int rows, T defo )
+	{
+		resize(cols, rows);
+		fill(defo);
+	}
+
+private:
 
 	int coordToIndex( int x, int y ) const
 	{
