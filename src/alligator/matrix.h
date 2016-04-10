@@ -114,6 +114,12 @@ void subcopy( const Matrix2D<T>& src, Matrix2D<T>& target,
 	subcopy<T>(src, target, subx, suby, src.cols(), src.rows());
 }
 
+template <typename T>
+Matrix2D<T> shrink_to_fit( const Matrix2D<T>& src, int border_size )
+{
+	// TODO
+}
+
 typedef Matrix2D<int> Matrix2Di;
 
 template <typename T>
