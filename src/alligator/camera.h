@@ -39,4 +39,36 @@ private:
 
 };
 
+
+class Scroller
+{
+public:
+	virtual ~Scroller() = 0 ;
+
+	void operator()(Camera& cam);
+
+	virtual Vec2f scroll( float current_x, float current_y ) = 0 ;
+
 };
+
+
+class FixedScroller : public Scroller
+{
+public:
+
+	FixedScroller( Rectf outer, Rectf inner, Rectf character, Vec2f viewport )
+		: m_outer(outer), m_inner(inner), m_character(character) {}
+
+	Vec2f scroll(float current_x, float current_y) override
+	{
+		Rectf campos = clamp(m_inner, m_outer);
+		return campos.min();
+	}
+
+private:
+	Rectf m_outer;
+	Rectf m_inner;
+	Rectf m_character;
+};
+
+

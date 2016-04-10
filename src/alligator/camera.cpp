@@ -38,3 +38,14 @@ void Camera::scale(float x, float y)
 	m_scale.set(x, y);
 }
 
+
+void Scroller::operator()(Camera &cam)
+{
+	Vec2f new_cam_position = scroll(cam.x(), cam.y());
+}
+
+
+Scroller::~Scroller()
+{
+
+}
