@@ -33,12 +33,12 @@ public:
 		m_x = x; m_y = y;
 	}
 
-	bool operator== ( const Vec2<T>& other )
+	bool operator== ( const Vec2<T>& other ) const
 	{
 		return other.m_x == m_x && other.m_y == m_y;
 	}
 
-	bool operator != ( const Vec2<T>& other )
+	bool operator != ( const Vec2<T>& other ) const
 	{
 		return !(other == *this);
 	}
