@@ -56,6 +56,13 @@ template <typename T>
 class Rect
 {
 public:
+	Rect( T x, T y, T w, T h )
+		: m_position(x, y),
+		  m_size(w, h)
+	{
+
+	}
+
 	Vec2<T> min()
 	{
 		return m_position;
