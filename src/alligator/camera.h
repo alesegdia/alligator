@@ -28,8 +28,8 @@ private:
 	ALLEGRO_TRANSFORM m_transform;
 
 	// cache last (position, scale) if performance issues
-	Vec2f m_scale;
-	Vec2f m_position;
-	float m_rotation;
+	Vec2f m_scale = Vec2f(0,0);
+	Vec2f m_position = Vec2f(0,0);
+	float m_rotation = 0;
 
 };
