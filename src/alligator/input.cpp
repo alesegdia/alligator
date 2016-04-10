@@ -42,3 +42,8 @@ void Input::NotifyKeyUp(int key)
 		instance->m_inputProcessor->keyUp(key);
 	}
 }
+
+void Input::SetInputProcessor(IInputProcessor::Ptr inputProcessor)
+{
+	instance->m_inputProcessor = inputProcessor;
+}

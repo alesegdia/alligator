@@ -17,10 +17,7 @@ public:
 	static void NotifyKeyDown( int key );
 	static void NotifyKeyUp( int key );
 
-	static void SetInputProcessor( IInputProcessor::Ptr inputProcessor )
-	{
-		instance->m_inputProcessor = inputProcessor;
-	}
+	static void SetInputProcessor( IInputProcessor::Ptr inputProcessor );
 
 private:
 	Input();
