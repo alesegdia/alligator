@@ -93,6 +93,27 @@ private:
 
 };
 
+template <typename T>
+void subcopy( const Matrix2D<T>& src, Matrix2D<T>& target,
+			  int subx, int suby, int subw, int subh )
+{
+	assert( src.cols() >= subw && src.rows() >= subh );
+	for( int x = 0; x < subw; x++ )
+	{
+		for( int y = 0; y < subh; y++ )
+		{
+			target.set(x + subx, y + suby, src.get(x, y));
+		}
+	}
+}
+
+template <typename T>
+void subcopy( const Matrix2D<T>& src, Matrix2D<T>& target,
+			  int subx, int suby )
+{
+	subcopy<T>(src, target, subx, suby, src.cols(), src.rows());
+}
+
 typedef Matrix2D<int> Matrix2Di;
 
 template <typename T>
