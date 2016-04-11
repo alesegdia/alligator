@@ -160,25 +160,37 @@ int Game::exec() {
 
 	double now, then;
 	now = then = al_get_time();
+	double accum = 0;
+	constexpr double FPS = 1/64.f;
 
 	while(!m_doexit) {
+
 		ALLEGRO_EVENT ev;
-		al_wait_for_event(m_eventQueue, &ev);
-		handleEvent(ev);
+		while( al_get_next_event(m_eventQueue, &ev) )
+		{
+			handleEvent(ev);
+		}
 
 		now = al_get_time();
 		double delta = now - then;
+		accum += delta;
 		then = now;
 
-		update(delta);
-		Input::Update();
-
-		if( m_redraw && al_is_event_queue_empty(m_eventQueue) )
+		if( accum > FPS )
 		{
-			al_set_target_bitmap(al_get_backbuffer(m_display));
-			m_redraw = false;
-			render();
-			al_flip_display();
+			accum -= FPS;
+			update(FPS);
+			Input::Update();
+		}
+
+		al_set_target_bitmap(al_get_backbuffer(m_display));
+		m_redraw = false;
+		render();
+		al_flip_display();
+
+
+		if( al_is_event_queue_empty(m_eventQueue) )
+		{
 		}
 	}
 
