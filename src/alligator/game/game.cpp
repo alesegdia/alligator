@@ -42,10 +42,7 @@ int Game::init() {
 		return -1;
 	}
 
-	if(!al_init_font_addon()) {
-		fprintf(stderr, "failed to initialize font addon!\n");
-		return -1;
-	}
+	al_init_font_addon();
 
 	if(!al_init_ttf_addon()) {
 		fprintf(stderr, "failed to initialize ttf addon!\n");
