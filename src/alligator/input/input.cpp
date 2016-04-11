@@ -48,6 +48,8 @@ void Input::NotifyKeyDown(int key)
 
 void Input::NotifyKeyUp(int key)
 {
+	std::cout << "recv keyup: " << key << std::endl;
+
 	instance->m_keyStates[key] = false;
 
 	if( instance->m_inputProcessor != nullptr )
