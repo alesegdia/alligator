@@ -21,7 +21,7 @@ void Animation::addFrames(std::vector<ALLEGRO_BITMAP *> frames)
 
 void Animation::updateData(AnimationData &data)
 {
-	while( data.timer > m_animDuration )
+	while( data.timer >= m_animDuration )
 	{
 		data.timer -= m_animDuration;
 	}
