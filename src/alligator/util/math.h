@@ -2,6 +2,7 @@
 #pragma once
 
 #include <algorithm>
+#include <iostream>
 
 template <typename T>
 class Vec2 {
@@ -9,6 +10,13 @@ public:
 	Vec2() : m_x(0), m_y(0) {}
 	Vec2(T x, T y) : m_x(x), m_y(y) {}
 	Vec2(const Vec2<T>& other) : Vec2(other.m_x, other.m_y) {}
+
+	static float Distance( const Vec2<T>& a, const Vec2<T>& b )
+	{
+		float dx = ((float)a.x()) - ((float)b.x());
+		float dy = ((float)a.y()) - ((float)b.y());
+		return sqrt( dx * dx + dy * dy );
+	}
 
 	void x( T newx )
 	{
@@ -35,6 +43,11 @@ public:
 		m_x = x; m_y = y;
 	}
 
+	Vec2<T> operator+( const Vec2<T>& other ) const
+	{
+		return Vec2<T>(m_x + other.m_x, m_y + other.m_y);
+	}
+
 	bool operator== ( const Vec2<T>& other ) const
 	{
 		return other.m_x == m_x && other.m_y == m_y;
@@ -48,6 +61,13 @@ public:
 private:
 	T m_x, m_y;
 };
+
+template <typename T>
+std::ostream &operator<<( std::ostream& os, const Vec2<T>& v )
+{
+	os << "(" << v.x() << "," << v.y() << ")";
+	return os;
+}
 
 typedef Vec2<int> Vec2i;
 typedef Vec2<float> Vec2f;
