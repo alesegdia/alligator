@@ -17,6 +17,8 @@ void Camera::bind()
 void Camera::position(Vec2f new_position)
 {
 	m_position = new_position;
+	m_position.y(-(m_position.y()) * m_scale.y());
+	m_position.x(-(m_position.x()) * m_scale.x());
 }
 
 float Camera::x()
