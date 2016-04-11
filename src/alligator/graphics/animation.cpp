@@ -27,6 +27,7 @@ void Animation::updateData(AnimationData &data)
 	}
 
 	int frame_index = floor(data.timer / m_frameDuration);
+	assert(frame_index < m_frames.size());
 	data.currentFrame = m_frames[frame_index];
 }
 
