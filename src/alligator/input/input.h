@@ -26,7 +26,7 @@ private:
 
 	static Input* instance;
 
-	IInputProcessor::Ptr m_inputProcessor;
+	IInputProcessor::Ptr m_inputProcessor = nullptr;
 	int m_lastPressed;
 
 	bool m_keyStates[ALLEGRO_KEY_MAX];
