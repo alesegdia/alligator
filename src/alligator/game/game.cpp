@@ -7,6 +7,8 @@
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_acodec.h>
 
 #include <alligator/util/rng.h>
 
@@ -40,6 +42,16 @@ int Game::init() {
 	if(!al_init_primitives_addon()) {
 		fprintf(stderr, "failed to initialize primitives addon!\n");
 		return -1;
+	}
+
+	if(!al_install_audio()) {
+		fprintf(stderr, "failed to initialize audio!\n");
+		return -1;
+	}
+
+	if(!al_init_acodec_addon()) {
+	   fprintf(stderr, "failed to initialize audio codecs!\n");
+	   return -1;
 	}
 
 	al_init_font_addon();
