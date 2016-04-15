@@ -12,7 +12,7 @@ public:
 
 	typedef std::shared_ptr<AudioStream> SharedPtr;
 
-	AudioStream(const char* path, ALLEGRO_EVENT_QUEUE* queue);
+	AudioStream(const char* path);
 
 	~AudioStream();
 

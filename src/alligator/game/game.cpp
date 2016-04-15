@@ -11,7 +11,6 @@
 #include <allegro5/allegro_acodec.h>
 
 #include <alligator/util/rng.h>
-#include <alligator/audio/audio.h>
 
 Game::Game( int screen_width, int screen_height )
 	: m_screenWidth(screen_width), m_screenHeight(screen_height)
@@ -102,7 +101,6 @@ int Game::init() {
 
 	RNG::Initialize(time(NULL));
 	Input::Initialize();
-	Audio::Initialize(m_eventQueue);
 
 	create();
 
@@ -212,7 +210,6 @@ int Game::exec() {
 
 	dispose();
 	Input::Dispose();
-	Audio::Dispose();
 
 	al_shutdown_image_addon();
 	al_shutdown_primitives_addon();
