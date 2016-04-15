@@ -11,6 +11,7 @@
 #include <allegro5/allegro_acodec.h>
 
 #include <alligator/util/rng.h>
+#include <alligator/audio/audio.h>
 
 Game::Game( int screen_width, int screen_height )
 	: m_screenWidth(screen_width), m_screenHeight(screen_height)
@@ -44,14 +45,14 @@ int Game::init() {
 		return -1;
 	}
 
-	if(!al_install_audio()) {
-		fprintf(stderr, "failed to initialize audio!\n");
-		return -1;
-	}
-
 	if(!al_init_acodec_addon()) {
 	   fprintf(stderr, "failed to initialize audio codecs!\n");
 	   return -1;
+	}
+
+	if(!al_install_audio()) {
+		fprintf(stderr, "failed to initialize audio!\n");
+		return -1;
 	}
 
 	al_init_font_addon();
@@ -85,6 +86,11 @@ int Game::init() {
 		return -1;
 	}
 
+	if (!al_reserve_samples(3)){
+	   fprintf(stderr, "failed to reserve samples!\n");
+	   return -1;
+	}
+
 	al_register_event_source(m_eventQueue, al_get_display_event_source(m_display));
 	al_register_event_source(m_eventQueue, al_get_timer_event_source(m_timer));
 	al_register_event_source(m_eventQueue, al_get_keyboard_event_source());
@@ -96,6 +102,7 @@ int Game::init() {
 
 	RNG::Initialize(time(NULL));
 	Input::Initialize();
+	Audio::Initialize(m_eventQueue);
 
 	create();
 
@@ -205,11 +212,14 @@ int Game::exec() {
 
 	dispose();
 	Input::Dispose();
+	Audio::Dispose();
 
 	al_shutdown_image_addon();
 	al_shutdown_primitives_addon();
 	al_shutdown_ttf_addon();
 	al_shutdown_font_addon();
+	al_uninstall_audio();
+	al_uninstall_keyboard();
 
 }
 
