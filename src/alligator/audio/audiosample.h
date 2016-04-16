@@ -11,26 +11,13 @@ public:
 
 	typedef std::shared_ptr<AudioSample> SharedPtr;
 
-	AudioSample( const char* path )
-	{
-		m_sample = al_load_sample(path);
-		assert(m_sample);
-	}
+	AudioSample( const char* path );
 
-	~AudioSample()
-	{
-		al_destroy_sample(m_sample);
-	}
+	~AudioSample();
 
-	void play()
-	{
-		al_play_sample(m_sample, 1.0f, 0.0f, 1.0f, ALLEGRO_PLAYMODE_ONCE, &m_id);
-	}
+	void play(float volume = 1.f);
 
-	void rewind()
-	{
-		al_stop_sample(&m_id);
-	}
+	void rewind();
 
 private:
 	ALLEGRO_SAMPLE* m_sample;

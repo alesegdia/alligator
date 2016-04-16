@@ -2,7 +2,7 @@
 #include "audiostream.h"
 
 
-AudioStream::AudioStream(const char *path)
+AudioStream::AudioStream(const char *path, ALLEGRO_PLAYMODE playmode)
 {
 	// load stream from file
 	m_stream = al_load_audio_stream(path, 4, 2048);
@@ -26,9 +26,31 @@ AudioStream::~AudioStream()
 	al_destroy_voice(m_voice);
 }
 
+void AudioStream::playmode(ALLEGRO_PLAYMODE playmode)
+{
+	al_set_audio_stream_playmode(m_stream, playmode);
+}
+
 void AudioStream::play()
 {
 	al_set_audio_stream_playing(m_stream, true);
 	al_set_voice_playing(m_voice, true);
+}
+
+void AudioStream::pause()
+{
+	al_set_audio_stream_playing(m_stream, false);
+	m_lastPause = al_get_audio_stream_position_secs(m_stream);
+}
+
+void AudioStream::resume()
+{
+	al_set_audio_stream_playing(m_stream, true);
+	assert(al_seek_audio_stream_secs(m_stream, m_lastPause));
+}
+
+bool AudioStream::playing()
+{
+	return al_get_audio_stream_playing(m_stream);
 }
 
