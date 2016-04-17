@@ -14,6 +14,9 @@ public:
 
 	void close();
 
+	void setScreen(IScreen::Ptr screen);
+
+
 private:
 
 	int init();
@@ -30,7 +33,6 @@ protected:
 	virtual void notifyKeyUp( int key );
 	virtual void notifyKeyDown( int key );
 
-	void setScreen(IScreen::Ptr screen);
 
 
 	int m_screenWidth, m_screenHeight;
