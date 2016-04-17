@@ -82,6 +82,11 @@ public:
 		fill(defo);
 	}
 
+	const std::vector<T>& data()
+	{
+		return m_data;
+	}
+
 private:
 
 	int coordToIndex( int x, int y ) const
