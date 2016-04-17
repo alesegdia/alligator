@@ -12,6 +12,14 @@ public:
 
 	explicit Spritesheet( size_t width, size_t height, ALLEGRO_BITMAP* bitmap );
 
+	~Spritesheet()
+	{
+		for( ALLEGRO_BITMAP* bm : m_frames )
+		{
+			al_destroy_bitmap(bm);
+		}
+	}
+
 	/**
 	 * @brief retrieves a frame by its index
 	 * @param num_frame frame index
