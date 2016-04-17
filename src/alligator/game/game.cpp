@@ -211,6 +211,7 @@ int Game::exec() {
 	dispose();
 	Input::Dispose();
 
+	al_destroy_display(m_display);
 	al_shutdown_image_addon();
 	al_shutdown_primitives_addon();
 	al_shutdown_ttf_addon();
