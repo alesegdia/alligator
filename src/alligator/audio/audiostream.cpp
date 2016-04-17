@@ -54,3 +54,9 @@ bool AudioStream::playing()
 	return al_get_audio_stream_playing(m_stream);
 }
 
+bool AudioStream::rewind()
+{
+	al_seek_audio_stream_secs(m_stream, 0);
+	return al_rewind_audio_stream(m_stream);
+}
+

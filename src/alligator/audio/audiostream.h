@@ -26,10 +26,7 @@ public:
 
 	bool playing();
 
-	bool rewind()
-	{
-		return al_rewind_audio_stream(m_stream);
-	}
+	bool rewind();
 
 private:
 	ALLEGRO_AUDIO_STREAM* m_stream;
