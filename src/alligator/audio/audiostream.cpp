@@ -14,6 +14,8 @@ AudioStream::AudioStream(const char *path, ALLEGRO_PLAYMODE playmode)
 
 	al_attach_audio_stream_to_voice(m_stream, m_voice);
 
+	this->playmode(playmode);
+
 	//al_detach_voice(m_voice);
 	//assert(m_stream != 0);
 }
