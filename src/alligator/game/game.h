@@ -37,8 +37,6 @@ protected:
 
 	int m_screenWidth, m_screenHeight;
 
-	const int FPS = 60;
-
 	ALLEGRO_DISPLAY* m_display = NULL;
 	ALLEGRO_EVENT_QUEUE* m_eventQueue = NULL;
 
