@@ -40,12 +40,12 @@ public:
 
 	}
 
-	void set( int col, int row, T value )
+	inline void set( int col, int row, T value )
 	{
 		m_data[coordToIndex(col, row)] = value;
 	}
 
-	T get( int col, int row ) const
+	inline T get( int col, int row ) const
 	{
 		return m_data[coordToIndex(col, row)];
 	}
