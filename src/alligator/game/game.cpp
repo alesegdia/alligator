@@ -165,7 +165,7 @@ int Game::exec() {
 	double now, then;
 	now = then = al_get_time();
 	double accum = 0;
-	constexpr double FPS = 1/64.f;
+	constexpr double FPS = 1/32.f;
 
 	while(!m_doexit) {
 
