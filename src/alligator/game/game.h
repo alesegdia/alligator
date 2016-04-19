@@ -41,7 +41,6 @@ protected:
 
 	ALLEGRO_DISPLAY* m_display = NULL;
 	ALLEGRO_EVENT_QUEUE* m_eventQueue = NULL;
-	ALLEGRO_TIMER* m_timer = NULL;
 
 	bool m_redraw = true;
 	bool m_doexit = false;

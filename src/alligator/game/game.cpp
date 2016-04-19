@@ -61,16 +61,9 @@ int Game::init() {
 		return -1;
 	}
 
-	m_timer = al_create_timer(1.0 / FPS);
-	if(!m_timer) {
-		fprintf(stderr, "failed to create timer!\n");
-		return -1;
-	}
-
 	m_display = al_create_display(m_screenWidth, m_screenHeight);
 	if(!m_display) {
 		fprintf(stderr, "failed to create display!\n");
-		al_destroy_timer(m_timer);
 		return -1;
 	}
 
@@ -81,7 +74,6 @@ int Game::init() {
 	if(!m_eventQueue) {
 		fprintf(stderr, "failed to create event_queue!\n");
 		al_destroy_display(m_display);
-		al_destroy_timer(m_timer);
 		return -1;
 	}
 
@@ -91,11 +83,9 @@ int Game::init() {
 	}
 
 	al_register_event_source(m_eventQueue, al_get_display_event_source(m_display));
-	al_register_event_source(m_eventQueue, al_get_timer_event_source(m_timer));
 	al_register_event_source(m_eventQueue, al_get_keyboard_event_source());
 
 	al_clear_to_color(al_map_rgb(0,0,0));
-	al_start_timer(m_timer);
 
 	al_set_target_bitmap(al_get_backbuffer(m_display));
 
