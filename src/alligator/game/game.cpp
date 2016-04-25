@@ -185,16 +185,11 @@ int Game::exec() {
 			accum -= FPS;
 			update(FPS);
 			Input::Update();
-		}
 
-		al_set_target_bitmap(al_get_backbuffer(m_display));
-		m_redraw = false;
-		render();
-		al_flip_display();
-
-
-		if( al_is_event_queue_empty(m_eventQueue) )
-		{
+			al_set_target_bitmap(al_get_backbuffer(m_display));
+			m_redraw = false;
+			render();
+			al_flip_display();
 		}
 	}
 
