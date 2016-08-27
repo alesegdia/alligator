@@ -138,6 +138,7 @@ void Game::render()
 
 void Game::update(double delta)
 {
+	Input::Update();
 	m_currentScreen->update(delta);
 }
 
@@ -198,7 +199,6 @@ int Game::exec() {
 		{
 			accum -= FPS;
 			update(FPS);
-			Input::Update();
 
 			al_set_target_bitmap(al_get_backbuffer(m_display));
 			m_redraw = false;
