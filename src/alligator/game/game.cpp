@@ -97,6 +97,7 @@ int Game::init() {
 	RNG::Initialize(time(NULL));
 	Input::Initialize();
 
+	al_grab_mouse(m_display);
 	create();
 
 	return 0;
