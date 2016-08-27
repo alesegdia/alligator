@@ -58,6 +58,13 @@ public:
 		return !(other == *this);
 	}
 
+	Vec2& operator*= ( float p )
+	{
+		m_x *= p;
+		m_y *= p;
+		return *this;
+	}
+
 private:
 	T m_x, m_y;
 };
