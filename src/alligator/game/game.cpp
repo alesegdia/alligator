@@ -151,6 +151,16 @@ void Game::notifyKeyDown(int key)
 	Input::NotifyKeyDown(key);
 }
 
+void Game::grabMouse()
+{
+	al_grab_mouse(m_display);
+}
+
+void Game::ungrabMouse()
+{
+	al_ungrab_mouse();
+}
+
 void Game::setScreen(IScreen::Ptr screen)
 {
 	if( m_currentScreen != nullptr )

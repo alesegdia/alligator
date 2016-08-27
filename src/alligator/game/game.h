@@ -35,7 +35,8 @@ protected:
 	virtual void notifyKeyUp( int key );
 	virtual void notifyKeyDown( int key );
 
-
+	void grabMouse();
+	void ungrabMouse();
 
 	int m_screenWidth, m_screenHeight;
 
