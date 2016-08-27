@@ -3,9 +3,13 @@
 #include <allegro5/allegro5.h>
 #include <alligator/util/math.h>
 
+#include <memory>
+
 class Camera
 {
 public:
+
+	typedef std::shared_ptr<Camera> SharedPtr;
 
 	Camera( Vec2f viewport );
 
