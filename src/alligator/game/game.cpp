@@ -97,7 +97,15 @@ int Game::init() {
 	RNG::Initialize(time(NULL));
 	Input::Initialize();
 
+	uint32_t version = al_get_allegro_version();
+	int major = version >> 24;
+	int minor = (version >> 16) & 255;
+	int revision = (version >> 8) & 255;
+	int release = version & 255;
+	printf("Allegro %d.%d.%d.%d\n", major, minor, revision, release);
+
 	al_grab_mouse(m_display);
+
 	create();
 
 	return 0;
