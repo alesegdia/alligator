@@ -34,6 +34,11 @@ int Game::init() {
 		return -1;
 	}
 
+	if(!al_install_mouse()) {
+		fprintf(stderr, "failed to initialize the mouse!\n");
+		return -1;
+	}
+
 	if(!al_init_image_addon()) {
 		fprintf(stderr, "failed to initialize image addon!\n");
 		return -1;
