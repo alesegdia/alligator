@@ -177,3 +177,21 @@ Rect<T> clamp( Rect<T> container, Rect<T> contained )
 	rect.y( clamp<T>(contained.y(), container.y(), container.y() + container.w() - contained.w()) );
 	return rect;
 }
+
+template <typename T>
+Vec2<T> ortho_to_iso( const Vec2<T>& ortho )
+{
+	int x, y;
+	x = ortho.x();
+	y = ortho.y();
+	return Vec2i( x - y, (x + y) / 2 );
+}
+
+template <typename T>
+Vec2<T> iso_to_ortho( const Vec2<T>& iso )
+{
+	int x, y;
+	x = iso.x();
+	y = iso.y();
+	return Vec2<T>( 2 * y + x, 2 * y - x );
+}
