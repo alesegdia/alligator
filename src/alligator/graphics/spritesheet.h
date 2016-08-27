@@ -36,6 +36,10 @@ public:
 	ALLEGRO_BITMAP* getFrame( int x_frame, int y_frame );
 
 	std::vector<ALLEGRO_BITMAP*> getFrames( int start, int end );
+	std::vector<ALLEGRO_BITMAP*> getAllFrames()
+	{
+		return getFrames(0, m_frames.size() - 1);
+	}
 
 private:
 
