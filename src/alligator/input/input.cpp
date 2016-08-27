@@ -26,12 +26,29 @@ bool Input::IsKeyJustPressed(int key)
 
 bool Input::Update()
 {
-	instance->m_lastPressed = ALLEGRO_KEY_MAX;
+	instance->update();
+}
+
+const Vec2i &Input::GetMousePosition()
+{
+	return instance->m_mousePos;
+}
+
+bool Input::IsMouseButtonPressed(int button)
+{
+	return al_mouse_button_down(&(instance->m_mouseState), button);
 }
 
 Input::Input()
 {
 	std::fill(std::begin(m_keyStates), std::begin(m_keyStates) + ALLEGRO_KEY_MAX, false);
+}
+
+void Input::update()
+{
+	m_lastPressed = ALLEGRO_KEY_MAX;
+	al_get_mouse_state(&m_mouseState);
+	m_mousePos.set( m_mouseState.x, m_mouseState.y );
 }
 
 void Input::NotifyKeyDown(int key)
