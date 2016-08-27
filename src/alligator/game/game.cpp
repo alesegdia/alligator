@@ -104,7 +104,6 @@ int Game::init() {
 	int release = version & 255;
 	printf("Allegro %d.%d.%d.%d\n", major, minor, revision, release);
 
-	al_grab_mouse(m_display);
 
 	create();
 
