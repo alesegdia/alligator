@@ -17,6 +17,7 @@ public:
 	static bool IsKeyDown( int key );
 	static bool IsKeyJustPressed( int key );
 	static bool Update();
+	static bool PreUpdate();
 
 	static const Vec2i& GetMousePosition();
 	static bool IsMouseButtonPressed(int button);
@@ -33,6 +34,7 @@ private:
 	Input();
 
 	void update();
+	void preUpdate();
 
 	static Input* instance;
 

@@ -29,6 +29,11 @@ bool Input::Update()
 	instance->update();
 }
 
+bool Input::PreUpdate()
+{
+	instance->preUpdate();
+}
+
 const Vec2i &Input::GetMousePosition()
 {
 	return instance->m_mousePos;
@@ -55,9 +60,14 @@ void Input::update()
 	if( m_lastMouseButtonPressed != 0 )
 	{
 		m_lastMouseButtonPressed = 0;
+		std::cout << "CLEAR last mouse button pressed" << std::endl;
 	}
-	al_get_mouse_state(&m_mouseState);
 	m_mousePos.set( m_mouseState.x, m_mouseState.y );
+}
+
+void Input::preUpdate()
+{
+	al_get_mouse_state(&m_mouseState);
 }
 
 void Input::NotifyKeyDown(int key)
@@ -73,6 +83,7 @@ void Input::NotifyKeyDown(int key)
 
 void Input::NotifyMouseButtonDown(int button)
 {
+	std::cout << "SET last mouse button pressed" << std::endl;
 	instance->m_lastMouseButtonPressed = button;
 }
 

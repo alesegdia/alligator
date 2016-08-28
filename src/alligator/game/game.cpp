@@ -216,6 +216,7 @@ int Game::exec() {
 		if( accum > FPS )
 		{
 			accum -= FPS;
+			Input::PreUpdate();
 			update(FPS);
 			Input::Update();
 
