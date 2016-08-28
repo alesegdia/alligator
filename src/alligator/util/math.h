@@ -195,3 +195,11 @@ Vec2<T> iso_to_ortho( const Vec2<T>& iso )
 	y = iso.y();
 	return Vec2<T>( 2 * y + x, 2 * y - x );
 }
+
+float lerp(float v0, float v1, float t);
+
+template <typename T>
+Vec2<T> lerp( const Vec2<T>& v0, const Vec2<T>& v1, float t )
+{
+	return Vec2<T>( lerp(v0.x(), v1.x(), t ), lerp(v0.y(), v1.y(), t ) );
+}
