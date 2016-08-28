@@ -34,6 +34,7 @@ protected:
 
 	virtual void notifyKeyUp( int key );
 	virtual void notifyKeyDown( int key );
+	virtual void notifyMouseButtonDown( int key );
 
 	void grabMouse();
 	void ungrabMouse();

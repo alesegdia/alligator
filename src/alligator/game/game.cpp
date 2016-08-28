@@ -89,6 +89,7 @@ int Game::init() {
 
 	al_register_event_source(m_eventQueue, al_get_display_event_source(m_display));
 	al_register_event_source(m_eventQueue, al_get_keyboard_event_source());
+	al_register_event_source(m_eventQueue, al_get_mouse_event_source());
 
 	al_clear_to_color(al_map_rgb(0,0,0));
 
@@ -128,6 +129,10 @@ void Game::handleEvent(ALLEGRO_EVENT& ev)
 	{
 		this->notifyKeyUp(ev.keyboard.keycode);
 	}
+	else if( ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN )
+	{
+		this->notifyMouseButtonDown(ev.mouse.button);
+	}
 }
 
 void Game::render()
@@ -148,6 +153,11 @@ void Game::notifyKeyUp(int key)
 void Game::notifyKeyDown(int key)
 {
 	Input::NotifyKeyDown(key);
+}
+
+void Game::notifyMouseButtonDown(int button)
+{
+	Input::NotifyMouseButtonDown(button);
 }
 
 void Game::grabMouse()
