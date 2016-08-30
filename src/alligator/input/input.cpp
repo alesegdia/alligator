@@ -60,7 +60,6 @@ void Input::update()
 	if( m_lastMouseButtonPressed != 0 )
 	{
 		m_lastMouseButtonPressed = 0;
-		std::cout << "CLEAR last mouse button pressed" << std::endl;
 	}
 	m_mousePos.set( m_mouseState.x, m_mouseState.y );
 }
@@ -83,7 +82,6 @@ void Input::NotifyKeyDown(int key)
 
 void Input::NotifyMouseButtonDown(int button)
 {
-	std::cout << "SET last mouse button pressed" << std::endl;
 	instance->m_lastMouseButtonPressed = button;
 }
 
