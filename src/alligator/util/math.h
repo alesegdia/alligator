@@ -15,7 +15,7 @@ public:
 	{
 		float dx = ((float)a.x()) - ((float)b.x());
 		float dy = ((float)a.y()) - ((float)b.y());
-		return sqrt( dx * dx + dy * dy );
+		return sqrtf( dx * dx + dy * dy );
 	}
 
 	void x( T newx )
