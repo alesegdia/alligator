@@ -3,6 +3,7 @@
 
 #include <algorithm>
 #include <iostream>
+#include <cmath>
 
 template <typename T>
 class Vec2 {
