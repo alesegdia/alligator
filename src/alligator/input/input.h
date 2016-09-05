@@ -28,21 +28,17 @@ public:
 
 	static void NotifyKeyUp( int key );
 
-	static void SetInputProcessor( IInputProcessor::Ptr inputProcessor );
+	static void AddInputProcessor( IInputProcessor::Ptr inputProcessor );
 
 private:
 	Input();
 
-	void update();
-	void preUpdate();
-
 	static Input* instance;
 
-	IInputProcessor::Ptr m_inputProcessor = nullptr;
+	std::vector<IInputProcessor::Ptr> m_inputProcessors;
 	int m_lastPressed;
 	int m_lastMouseButtonPressed;
 	Vec2i m_mousePos;
 	ALLEGRO_MOUSE_STATE m_mouseState;
-
 	bool m_keyStates[ALLEGRO_KEY_MAX];
 };

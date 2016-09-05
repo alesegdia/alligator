@@ -26,12 +26,17 @@ bool Input::IsKeyJustPressed(int key)
 
 bool Input::Update()
 {
-	instance->update();
+	instance->m_lastPressed = ALLEGRO_KEY_MAX;
+	if( instance->m_lastMouseButtonPressed != 0 )
+	{
+		instance->m_lastMouseButtonPressed = 0;
+	}
+	instance->m_mousePos.set( instance->m_mouseState.x, instance->m_mouseState.y );
 }
 
 bool Input::PreUpdate()
 {
-	instance->preUpdate();
+	al_get_mouse_state(&instance->m_mouseState);
 }
 
 const Vec2i &Input::GetMousePosition()
@@ -51,22 +56,7 @@ bool Input::IsMouseButtonJustPressed(int button)
 
 Input::Input()
 {
-	std::fill(std::begin(m_keyStates), std::begin(m_keyStates) + ALLEGRO_KEY_MAX, false);
-}
-
-void Input::update()
-{
-	m_lastPressed = ALLEGRO_KEY_MAX;
-	if( m_lastMouseButtonPressed != 0 )
-	{
-		m_lastMouseButtonPressed = 0;
-	}
-	m_mousePos.set( m_mouseState.x, m_mouseState.y );
-}
-
-void Input::preUpdate()
-{
-	al_get_mouse_state(&m_mouseState);
+	memset( m_keyStates, 0, ALLEGRO_KEY_MAX );
 }
 
 void Input::NotifyKeyDown(int key)
@@ -74,9 +64,9 @@ void Input::NotifyKeyDown(int key)
 	instance->m_keyStates[key] = true;
 	instance->m_lastPressed = key;
 
-	if( instance->m_inputProcessor != nullptr )
+	for( auto processor : instance->m_inputProcessors )
 	{
-		instance->m_inputProcessor->keyDown(key);
+		processor->keyDown(key);
 	}
 }
 
@@ -89,13 +79,14 @@ void Input::NotifyKeyUp(int key)
 {
 	instance->m_keyStates[key] = false;
 
-	if( instance->m_inputProcessor != nullptr )
+	for( auto processor : instance->m_inputProcessors )
 	{
-		instance->m_inputProcessor->keyUp(key);
+		processor->keyUp(key);
 	}
 }
 
-void Input::SetInputProcessor(IInputProcessor::Ptr inputProcessor)
+void Input::AddInputProcessor(IInputProcessor::Ptr inputProcessor)
 {
-	instance->m_inputProcessor = inputProcessor;
+	instance->m_inputProcessors.push_back(inputProcessor);
+	instance->m_inputProcessors.shrink_to_fit();
 }
