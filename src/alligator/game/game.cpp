@@ -23,7 +23,7 @@ Game::~Game()
 
 }
 
-int Game::init() {
+int Game::init(int argc, char** argv) {
 	if(!al_init()) {
 		fprintf(stderr, "failed to initialize allegro!\n");
 		return -1;
@@ -106,9 +106,7 @@ int Game::init() {
 	printf("Allegro %d.%d.%d.%d\n", major, minor, revision, release);
 
 
-	create();
-
-	return 0;
+	return create(argc, argv);
 }
 
 void Game::handleEvent(ALLEGRO_EVENT& ev)
@@ -191,8 +189,8 @@ ALLEGRO_DISPLAY *Game::display()
 	return m_display;
 }
 
-int Game::exec() {
-	int retcode = init();
+int Game::exec(int argc, char** argv) {
+	int retcode = init(argc, argv);
 	if( retcode != 0 ) return retcode;
 
 	double now, then;

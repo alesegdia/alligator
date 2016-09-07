@@ -11,7 +11,7 @@ public:
 	Game ( int screen_width, int screen_height );
 	virtual ~Game ();
 
-	int exec();
+	int exec(int argc, char** argv);
 	ALLEGRO_DISPLAY* display();
 
 	void close();
@@ -21,7 +21,7 @@ public:
 
 private:
 
-	int init();
+	int init(int argc, char **argv);
 
 protected:
 
@@ -29,7 +29,7 @@ protected:
 
 	virtual void render();
 	virtual void update(double delta);
-	virtual void create() = 0 ;
+	virtual int create(int argc, char** argv) = 0 ;
 	virtual void dispose() = 0 ;
 
 	virtual void notifyKeyUp( int key );
