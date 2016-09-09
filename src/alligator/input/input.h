@@ -29,6 +29,7 @@ public:
 	static void NotifyKeyUp( int key );
 
 	static void AddInputProcessor( IInputProcessor::Ptr inputProcessor );
+	static void RemoveInputProcessor( IInputProcessor::Ptr inputProcessor );
 
 private:
 	Input();

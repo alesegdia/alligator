@@ -90,3 +90,9 @@ void Input::AddInputProcessor(IInputProcessor::Ptr inputProcessor)
 	instance->m_inputProcessors.push_back(inputProcessor);
 	instance->m_inputProcessors.shrink_to_fit();
 }
+
+void Input::RemoveInputProcessor(IInputProcessor::Ptr inputProcessor)
+{
+	auto& v = instance->m_inputProcessors;
+	v.erase(std::remove(v.begin(), v.end(), inputProcessor), v.end());
+}
