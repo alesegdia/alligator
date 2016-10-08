@@ -10,6 +10,12 @@ public:
 
 	static void Initialize( uint32_t seed );
 
+	uint32_t nextInt( int min, int max )
+	{
+		uint32_t n = nextInt(max - min);
+		return n + uint32_t(min);
+	}
+
 	uint32_t nextInt( int max );
 	bool nextBool()
 	{
