@@ -11,7 +11,7 @@ public:
 
 	typedef std::shared_ptr<Camera> SharedPtr;
 
-	Camera( Vec2f viewport );
+	Camera( Vec2f viewport = Vec2f(0, 0) );
 
 	void bind();
 
