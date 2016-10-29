@@ -10,6 +10,12 @@ public:
 
 	typedef std::shared_ptr<Spritesheet> SharedPtr;
 
+	/**
+	 * @brief Spritesheet
+	 * @param width in tiles
+	 * @param height in tiles
+	 * @param bitmap
+	 */
 	explicit Spritesheet( size_t width, size_t height, ALLEGRO_BITMAP* bitmap );
 
 	~Spritesheet()
