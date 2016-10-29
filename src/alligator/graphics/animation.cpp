@@ -8,6 +8,12 @@ Animation::Animation(float frame_duration, int num_frames)
 	m_frames.reserve(m_numFrames);
 }
 
+Animation::Animation(float frame_duration, int num_frames, std::vector<ALLEGRO_BITMAP *> frames)
+	: Animation(frame_duration, num_frames)
+{
+	addFrames(frames);
+}
+
 void Animation::addFrame(ALLEGRO_BITMAP *frame)
 {
 	m_frames.push_back(frame);

@@ -24,6 +24,7 @@ public:
 	typedef std::shared_ptr<Animation> SharedPtr;
 
 	Animation(float frame_duration, int num_frames);
+	Animation(float frame_duration, int num_frames, std::vector<ALLEGRO_BITMAP*> frames);
 
 	/**
 	 * @brief adds a frame to the animation
