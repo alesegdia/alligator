@@ -80,7 +80,7 @@ std::ostream &operator<<( std::ostream& os, const Vec2<T>& v )
 typedef Vec2<int> Vec2i;
 typedef Vec2<float> Vec2f;
 
-namespace allig::math {
+namespace allig { namespace math {
 
 template <typename T>
 T distance( const Vec2<T>& a, const Vec2<T>& b )
@@ -98,7 +98,7 @@ T distancef( const Vec2<T>& a, const Vec2<T>& b )
 	return sqrtf(dx * dx + dy * dy);
 }
 
-}
+}}
 
 template <typename T>
 class Rect

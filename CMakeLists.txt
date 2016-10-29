@@ -41,7 +41,7 @@ set(ALLIGATOR_SOURCES
 add_library(alligator ${ALLIGATOR_SOURCES})
 
 set_target_properties(alligator PROPERTIES
-	COMPILE_FLAGS "-std=c++1z"
+	COMPILE_FLAGS "-std=c++11"
 	LINK_FLAGS "-g -ftest-coverage -fprofile-arcs"
 	INCLUDE_DIRECTORIES ${CMAKE_CURRENT_SOURCE_DIR}/src
 	)
