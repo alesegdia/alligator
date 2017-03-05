@@ -7,36 +7,12 @@ endif()
 
 set(LIBRARY_OUTPUT_PATH ${CMAKE_HOME_DIRECTORY}/bin)
 
+
+file(GLOB_RECURSE SRCS *.cpp)
+file(GLOB_RECURSE HDRS *.h)
+
 set(ALLIGATOR_SOURCES
-	src/alligator/audio/audiosample.cpp
-	src/alligator/audio/audiosample.h
-	src/alligator/audio/audiostream.cpp
-	src/alligator/audio/audiostream.h
-
-	src/alligator/camera/camera.cpp
-	src/alligator/camera/camera.h
-
-	src/alligator/game/game.cpp
-	src/alligator/game/game.h
-	src/alligator/game/iscreen.cpp
-	src/alligator/game/iscreen.h
-
-	src/alligator/graphics/animation.cpp
-	src/alligator/graphics/animation.h
-	src/alligator/graphics/spritesheet.cpp
-	src/alligator/graphics/spritesheet.h
-
-	src/alligator/input/iinputprocessor.cpp
-	src/alligator/input/iinputprocessor.h
-	src/alligator/input/input.cpp
-	src/alligator/input/input.h
-
-	src/alligator/util/math.cpp
-	src/alligator/util/math.h
-	src/alligator/util/matrix.h
-	src/alligator/util/rng.cpp
-	src/alligator/util/rng.h
-	)
+    ${SRCS} ${HDRS})
 
 add_library(alligator ${ALLIGATOR_SOURCES})
 
