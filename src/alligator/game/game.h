@@ -18,6 +18,16 @@ public:
 
 	void setScreen(IScreen::Ptr screen);
 
+    void setUpdateFPS( int fps )
+    {
+        m_updateFPS = 1.0 / double(fps);
+    }
+
+    void setRenderFPS( int fps )
+    {
+        m_renderFPS = 1.0 / double(fps);
+    }
+
 
 private:
 
@@ -44,8 +54,12 @@ protected:
 	ALLEGRO_DISPLAY* m_display = NULL;
 	ALLEGRO_EVENT_QUEUE* m_eventQueue = NULL;
 
-	bool m_redraw = true;
 	bool m_doexit = false;
+
+    bool m_showTitleFPS = true;
+
+    double m_renderFPS = 1.0 / 120.f;
+    double m_updateFPS = 1.0 / 120.f;
 
 	// current screen
 	IScreen::Ptr m_currentScreen;

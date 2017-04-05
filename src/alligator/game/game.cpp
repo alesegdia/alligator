@@ -87,13 +87,15 @@ int Game::init(int argc, char** argv) {
 	   return -1;
 	}
 
-	al_register_event_source(m_eventQueue, al_get_display_event_source(m_display));
+    al_register_event_source(m_eventQueue, al_get_display_event_source(m_display));
 	al_register_event_source(m_eventQueue, al_get_keyboard_event_source());
 	al_register_event_source(m_eventQueue, al_get_mouse_event_source());
 
 	al_clear_to_color(al_map_rgb(0,0,0));
 
 	al_set_target_bitmap(al_get_backbuffer(m_display));
+
+    al_set_new_display_option(ALLEGRO_VSYNC, 2, 1000);
 
 	RNG::Initialize(time(NULL));
 	Input::Initialize();
@@ -111,11 +113,7 @@ int Game::init(int argc, char** argv) {
 
 void Game::handleEvent(ALLEGRO_EVENT& ev)
 {
-	if(ev.type == ALLEGRO_EVENT_TIMER)
-	{
-		m_redraw = true;
-	}
-	else if(ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+    if(ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
 	{
 		m_doexit = true;
 	}
@@ -179,14 +177,24 @@ void Game::setScreen(IScreen::Ptr screen)
 	m_currentScreen->show();
 }
 
+void Game::setUpdateFPS(int fps)
+{
+    m_updateFPS = 1.0 / double(fps);
+}
+
+void Game::setRenderFPS(int fps)
+{
+    m_renderFPS = 1.0 / double(fps);
+}
+
 void Game::close()
 {
-	m_doexit = true;
+    m_doexit = true;
 }
 
 ALLEGRO_DISPLAY *Game::display()
 {
-	return m_display;
+    return m_display;
 }
 
 int Game::exec(int argc, char** argv) {
@@ -195,8 +203,8 @@ int Game::exec(int argc, char** argv) {
 
 	double now, then;
 	now = then = al_get_time();
-	double accum = 0;
-	constexpr double FPS = 1/32.f;
+    double accum[2] = { 0, 0 };
+    double title_accum = 0;
 
 	while(!m_doexit) {
 
@@ -208,21 +216,40 @@ int Game::exec(int argc, char** argv) {
 
 		now = al_get_time();
 		double delta = now - then;
-		accum += delta;
+
+        accum[0] += delta;
+        accum[1] += delta;
+
 		then = now;
 
-		if( accum > FPS )
-		{
-			accum -= FPS;
-			Input::PreUpdate();
-			update(FPS);
-			Input::Update();
+        if( m_showTitleFPS )
+        {
+            title_accum += delta;
+            if( title_accum >= 1 ) {
+                title_accum = 0;
+                char buffer[16];
+                sprintf(buffer, "%.6f", 1.0 / delta);
+                al_set_window_title(m_display, buffer);
+            }
+        }
 
+        // render
+        if( accum[0] > m_renderFPS )
+		{
+            accum[0] -= m_renderFPS;
 			al_set_target_bitmap(al_get_backbuffer(m_display));
-			m_redraw = false;
 			render();
 			al_flip_display();
 		}
+
+        // update
+        if( accum[1] > m_updateFPS )
+        {
+            accum[1] -= m_updateFPS;
+            Input::PreUpdate();
+            update(m_updateFPS);
+            Input::Update();
+        }
 	}
 
 	dispose();
