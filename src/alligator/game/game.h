@@ -18,15 +18,9 @@ public:
 
 	void setScreen(IScreen::Ptr screen);
 
-    void setUpdateFPS( int fps )
-    {
-        m_updateFPS = 1.0 / double(fps);
-    }
+    void setUpdateFPS( int fps );
 
-    void setRenderFPS( int fps )
-    {
-        m_renderFPS = 1.0 / double(fps);
-    }
+    void setRenderFPS( int fps );
 
 
 private:
