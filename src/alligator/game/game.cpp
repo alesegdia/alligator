@@ -206,6 +206,8 @@ int Game::exec(int argc, char** argv) {
     double accum[2] = { 0, 0 };
     double title_accum = 0;
 
+    int current_fps = 0 ;
+
 	while(!m_doexit) {
 
 		ALLEGRO_EVENT ev;
@@ -225,8 +227,10 @@ int Game::exec(int argc, char** argv) {
         if( m_showTitleFPS )
         {
             title_accum += delta;
+            current_fps++;
             if( title_accum >= 1 ) {
                 title_accum = 0;
+                current_fps = 0;
                 char buffer[16];
                 sprintf(buffer, "%.6f", 1.0 / delta);
                 al_set_window_title(m_display, buffer);
@@ -243,11 +247,12 @@ int Game::exec(int argc, char** argv) {
 		}
 
         // update
-        if( accum[1] > m_updateFPS )
+        while( accum[1] > m_updateFPS )
         {
             accum[1] -= m_updateFPS;
             Input::PreUpdate();
             update(m_updateFPS);
+            //std::cout << "update delta: " << m_updateFPS << std::endl;
             Input::Update();
         }
 	}
