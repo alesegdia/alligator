@@ -13,7 +13,7 @@ struct AnimationData
 
 	void render(float x, float y);
 
-	float timer = 0;
+    double timer = 0;
 	ALLEGRO_BITMAP* currentFrame;
 };
 
