@@ -32,11 +32,13 @@ bool Input::Update()
 		instance->m_lastMouseButtonPressed = 0;
 	}
 	instance->m_mousePos.set( instance->m_mouseState.x, instance->m_mouseState.y );
+	return true;
 }
 
 bool Input::PreUpdate()
 {
 	al_get_mouse_state(&instance->m_mouseState);
+	return true;
 }
 
 const Vec2i &Input::GetMousePosition()

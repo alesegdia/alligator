@@ -2,6 +2,7 @@
 
 #include <allegro5/allegro.h>
 #include <memory>
+#include <vector>
 
 #include "../util/math.h"
 

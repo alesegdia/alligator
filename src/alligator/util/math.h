@@ -12,11 +12,16 @@ public:
 	Vec2(T x, T y) : m_x(x), m_y(y) {}
 	Vec2(const Vec2<T>& other) : Vec2(other.m_x, other.m_y) {}
 
-	static float Distance( const Vec2<T>& a, const Vec2<T>& b )
+	static float Distance(const Vec2<T>& a, const Vec2<T>& b)
+	{
+		return sqrtf(DistanceSquared(a, b));
+	}
+
+	static float DistanceSquared(const Vec2<T>& a, const Vec2<T>& b)
 	{
 		float dx = ((float)a.x()) - ((float)b.x());
 		float dy = ((float)a.y()) - ((float)b.y());
-		return sqrtf( dx * dx + dy * dy );
+		return dx * dx + dy * dy;
 	}
 
 	void x( T newx )
