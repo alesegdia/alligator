@@ -71,6 +71,20 @@ public:
 		return *this;
 	}
 
+    Vec2& operator /= ( const Vec2<T>& other )
+    {
+        m_x /= other.x();
+        m_y /= other.y();
+        return *this;
+    }
+
+    Vec2& operator /= ( T factor )
+    {
+        m_x /= factor;
+        m_y /= factor;
+        return *this;
+    }
+
 private:
 	T m_x, m_y;
 };

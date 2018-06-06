@@ -42,6 +42,8 @@ public:
 
 	inline void set( int col, int row, T value )
 	{
+        assert(col >= 0 && col < m_cols);
+        assert(row >= 0 && row < m_rows);
 		m_data[coordToIndex(col, row)] = value;
 	}
 
@@ -86,6 +88,19 @@ public:
 	{
 		return m_data;
 	}
+
+    void debugPrint()
+    {
+        printf("cols: %d, rows: %d\n", m_cols, m_rows);
+        for( int i = 0; i < m_rows; i++ )
+        {
+            for( int j = 0; j < m_cols; j++ )
+            {
+                printf("%d", this->get(j, i));
+            }
+            printf("\n");
+        }
+    }
 
 private:
 
