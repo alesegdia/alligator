@@ -102,6 +102,12 @@ public:
         }
     }
 
+    Matrix2D<T>& operator==(const Matrix2D<T>& m)
+    {
+        std::copy( m.m_data.begin(), m.m_data.end(), this->m_data.begin() );
+        return *this;
+    }
+
 private:
 
 	int coordToIndex( int x, int y ) const
