@@ -40,6 +40,12 @@ public:
 	 */
 	void updateData( AnimationData& data );
 
+    ALLEGRO_BITMAP* getFrame( int n )
+    {
+        assert(n >= 0 && n < m_frames.size());
+        return m_frames[n];
+    }
+
 private:
 	std::vector<ALLEGRO_BITMAP*> m_frames;
 	float m_frameDuration;
