@@ -8,26 +8,26 @@ Spritesheet::Spritesheet(size_t width, size_t height, ALLEGRO_BITMAP *bitmap)
 	reset( width, height, bitmap );
 }
 
-ALLEGRO_BITMAP *Spritesheet::getFrame(int num_frame)
+ALLEGRO_BITMAP *Spritesheet::getFrame(size_t num_frame)
 {
-	assert( num_frame >= 0 && num_frame < m_frames.size() );
+	assert( num_frame < m_frames.size() );
 	return m_frames[num_frame];
 }
 
-ALLEGRO_BITMAP *Spritesheet::getFrame(int x_frame, int y_frame)
+ALLEGRO_BITMAP *Spritesheet::getFrame(size_t x_frame, size_t y_frame)
 {
-	int index = coordToIndex(x_frame, y_frame);
+	size_t index = coordToIndex(x_frame, y_frame);
 	assert( index < m_frames.size() );
 	return getFrame(coordToIndex(x_frame, y_frame));
 }
 
-std::vector<ALLEGRO_BITMAP *> Spritesheet::getFrames(int start, int end)
+std::vector<ALLEGRO_BITMAP *> Spritesheet::getFrames(size_t start, size_t end)
 {
-	assert( start >= 0 && start <= m_frames.size() );
-	assert( end >= 0 && end <= m_frames.size() );
+	assert( start <= m_frames.size() );
+	assert( end <= m_frames.size() );
 
 	std::vector<ALLEGRO_BITMAP*> frames;
-	for( int i = start; i <= end; i++ )
+	for( size_t i = start; i <= end; i++ )
 	{
 		frames.push_back(m_frames[i]);
 	}
@@ -57,7 +57,7 @@ void Spritesheet::reset(size_t width, size_t height, ALLEGRO_BITMAP *bitmap)
 	}
 }
 
-int Spritesheet::coordToIndex(int x, int y)
+size_t Spritesheet::coordToIndex(size_t x, size_t y)
 {
 	return y * m_width + x;
 }

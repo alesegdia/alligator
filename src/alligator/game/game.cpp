@@ -232,7 +232,7 @@ int Game::exec(int argc, char** argv) {
                 title_accum = 0;
                 current_fps = 0;
                 char buffer[16];
-                sprintf(buffer, "%.6f", 1.0 / delta);
+                sprintf_s(buffer, "%.6f", 1.0 / delta);
                 al_set_window_title(m_display, buffer);
             }
         }
@@ -268,6 +268,8 @@ int Game::exec(int argc, char** argv) {
 	al_uninstall_audio();
 	al_uninstall_keyboard();
 	al_uninstall_mouse();
+
+	return 0;
 
 }
 

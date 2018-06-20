@@ -32,7 +32,7 @@ void Animation::updateData(AnimationData &data)
 		data.timer -= m_animDuration;
 	}
 
-	int frame_index = floor(data.timer / m_frameDuration);
+	size_t frame_index = floor(data.timer / m_frameDuration);
 	assert(frame_index < m_frames.size());
 	data.currentFrame = m_frames[frame_index];
 }

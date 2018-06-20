@@ -31,7 +31,7 @@ public:
 	 * @param num_frame frame index
 	 * @return the sub bitmap associated to the index
 	 */
-	ALLEGRO_BITMAP* getFrame( int num_frame );
+	ALLEGRO_BITMAP* getFrame( size_t num_frame );
 
 	/**
 	 * @brief retrieves a frame by its coordinate
@@ -39,9 +39,9 @@ public:
 	 * @param y_frame the y coordinate
 	 * @return the sub bitmap in specified coordinate
 	 */
-	ALLEGRO_BITMAP* getFrame( int x_frame, int y_frame );
+	ALLEGRO_BITMAP* getFrame( size_t x_frame, size_t y_frame );
 
-	std::vector<ALLEGRO_BITMAP*> getFrames( int start, int end );
+	std::vector<ALLEGRO_BITMAP*> getFrames(size_t start, size_t end );
 	std::vector<ALLEGRO_BITMAP*> getAllFrames()
 	{
 		return getFrames(0, m_frames.size() - 1);
@@ -63,7 +63,7 @@ private:
 	 * @param y coordinate
 	 * @return the index
 	 */
-	int coordToIndex( int x, int y );
+	size_t coordToIndex(size_t x, size_t y );
 
 	std::vector<ALLEGRO_BITMAP*> m_frames;
 	ALLEGRO_BITMAP* m_bitmap;
