@@ -42,7 +42,7 @@ public:
 
     ALLEGRO_BITMAP* getFrame( size_t n )
     {
-        assert(n >= 0 && n < m_frames.size());
+        assert(n < m_frames.size());
         return m_frames[n];
     }
 
