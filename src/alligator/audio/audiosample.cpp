@@ -4,7 +4,7 @@
 AudioSample::AudioSample(const char *path)
 {
 	m_sample = al_load_sample(path);
-	assert(m_sample);
+    assert(m_sample != nullptr);
 }
 
 AudioSample::~AudioSample()

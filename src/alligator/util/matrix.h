@@ -116,7 +116,7 @@ private:
 	}
 
 	std::vector<T> m_data;
-	int m_cols, m_rows;
+    int m_rows, m_cols;
 
 };
 
