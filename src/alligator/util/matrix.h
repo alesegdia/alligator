@@ -89,7 +89,7 @@ public:
 		return m_data;
 	}
 
-    void debugPrint()
+    void debugPrint() const
     {
         printf("cols: %d, rows: %d\n", m_cols, m_rows);
         for( int i = 0; i < m_rows; i++ )
@@ -100,6 +100,7 @@ public:
             }
             printf("\n");
         }
+        fflush(0);
     }
 
     Matrix2D<T>& operator==(const Matrix2D<T>& m)
